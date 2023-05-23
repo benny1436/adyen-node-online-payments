@@ -39,6 +39,8 @@ async function finalizeCheckout() {
 }
 
 async function createAdyenCheckout(session) {
+
+  console.log(session)
   
     const configuration = {
         clientKey,
@@ -52,20 +54,11 @@ async function createAdyenCheckout(session) {
             },
             card: {
                 hasHolderName: true,
-                holderNameRequired: true,
                 name: "Credit or debit card",
-                amount: {
-                    value: 10000,
-                    currency: "EUR"
-                }
             },
             paypal: {
-                amount: {
-                    currency: "USD",
-                    value: 10000
-                },
                 environment: "test",
-                countryCode: "US"   // Only needed for test. This will be automatically retrieved when you are in production.
+                countryCode: "PH"   // Only needed for test. This will be automatically retrieved when you are in production.
             }
         },
         onPaymentCompleted: (result, component) => {

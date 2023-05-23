@@ -50,15 +50,15 @@ app.post("/api/sessions", async (req, res) => {
 
   try {
     // unique ref for the transaction
-    const orderRef = uuid();
+    const orderRef = "dfsdfsdfsdfs";
     // Allows for gitpod support
     const localhost = req.get('host');
     // const isHttps = req.connection.encrypted;
     const protocol = req.socket.encrypted? 'https' : 'http';
     // Ideally the data passed here should be computed based on business logic
     const response = await checkout.sessions({
-      amount: { currency: "EUR", value: 10000 }, // value is 100€ in minor units
-      countryCode: "NL",
+      amount: { currency: "PHP", value: 10000 }, // value is 100€ in minor units
+      countryCode: "PH",
       merchantAccount: process.env.ADYEN_MERCHANT_ACCOUNT, // required
       reference: orderRef, // required: your Payment Reference
       returnUrl: `${protocol}://${localhost}/checkout?orderRef=${orderRef}`, // set redirect URL required for some payment methods (ie iDEAL)
@@ -68,6 +68,8 @@ app.post("/api/sessions", async (req, res) => {
         {quantity: 1, amountIncludingTax: 5000 , description: "Headphones"}
       ] 
     });
+
+    console.log(response)
 
     res.json(response);
   } catch (err) {
